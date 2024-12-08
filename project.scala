@@ -1,4 +1,4 @@
-//> using platform jvm
+//> using platform native
 //> using scala 2.13.14
 
 //> using nativeVersion 0.5.6
