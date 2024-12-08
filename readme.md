@@ -38,6 +38,8 @@ This branch _attempts_ to switch the _platform_ to scala native. I'm stuck on a 
 
 My belief, is that this is a SN bug...
 
+If I can get past this one, I believe there is one further bug in respect of file locking, but then it would work.
+
 ```
 git checkout native
 scala-cli test .
