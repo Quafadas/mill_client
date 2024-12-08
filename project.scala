@@ -4,7 +4,7 @@
 //> using nativeVersion 0.5.6
 
 //> using test.dep com.lihaoyi::utest::0.8.4
-//> using resourceDir ./resources
+// //> using resourceDir ./resources
 //> using test.resourceDir ./resources
 //> using nativeEmbedResources true
 
