@@ -5,6 +5,7 @@
 
 //> using test.dep com.lihaoyi::utest::0.8.4
 //> using resourceDir ./resources
+//> using test.resourceDir ./resources
 //> using nativeEmbedResources true
 
 //> using dep pt.kcry::sha::2.0.2

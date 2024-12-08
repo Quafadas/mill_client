@@ -10,8 +10,8 @@ object MillEnvTests extends TestSuite {
     test("readOptsFileLinesWithoutFinalNewline") {
       // val file = Paths.get(getClass.getClassLoader.getResource("file-wo-final-newline.txt").toURI).toFile
       val f = os.temp(prefix = "mill")
-      val resourceFile = getClass().getResourceAsStream("./file-wo-final-newline.txt")
-      os.write(f, resourceFile.readAllBytes())
+      val resourceFile = this.getClass().getResourceAsStream("/file-wo-final-newline.txt")
+      os.write.over(f, resourceFile.readAllBytes())
       val lines = Util.readOptsFileLines(f.toIO)
       val expectedLines = List(
         "-DPROPERTY_PROPERLY_SET_VIA_JVM_OPTS=value-from-file",
