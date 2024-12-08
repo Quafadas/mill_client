@@ -4,34 +4,34 @@ import utest._
 import mill.main.client.ProxyStream
 import scala.concurrent.Future
 
-class TeeOutputStream(out1: OutputStream, out2: OutputStream) extends OutputStream {
-  println("WARNING: On JVM TeeOutputStream comes from apache commons. It is not availble in Scala Native")
-  println("I've tried to hack together a naive implementation, but it may be wrong and risky ...")
-  override def write(b: Int): Unit = {
-    out1.write(b)
-    out2.write(b)
-  }
+// class TeeOutputStream(out1: OutputStream, out2: OutputStream) extends OutputStream {
+//   println("WARNING: On JVM TeeOutputStream comes from apache commons. It is not availble in Scala Native")
+//   println("I've tried to hack together a naive implementation, but it may be wrong and risky ...")
+//   override def write(b: Int): Unit = {
+//     out1.write(b)
+//     out2.write(b)
+//   }
 
-  override def write(b: Array[Byte]): Unit = {
-    out1.write(b)
-    out2.write(b)
-  }
+//   override def write(b: Array[Byte]): Unit = {
+//     out1.write(b)
+//     out2.write(b)
+//   }
 
-  override def write(b: Array[Byte], off: Int, len: Int): Unit = {
-    out1.write(b, off, len)
-    out2.write(b, off, len)
-  }
+//   override def write(b: Array[Byte], off: Int, len: Int): Unit = {
+//     out1.write(b, off, len)
+//     out2.write(b, off, len)
+//   }
 
-  override def flush(): Unit = {
-    out1.flush()
-    out2.flush()
-  }
+//   override def flush(): Unit = {
+//     out1.flush()
+//     out2.flush()
+//   }
 
-  override def close(): Unit = {
-    try out1.close()
-    finally out2.close()
-  }
-}
+//   override def close(): Unit = {
+//     try out1.close()
+//     finally out2.close()
+//   }
+// }
 
 object ProxyStreamTests extends TestSuite {
   implicit val ec: scala.concurrent.ExecutionContext = scala.concurrent.ExecutionContext.global
@@ -64,20 +64,9 @@ object ProxyStreamTests extends TestSuite {
   }
 
   def test0(outData: Array[Byte], errData: Array[Byte], repeats: Int, gracefulEnd: Boolean): Unit = {
-    println("WARNING: Original implementation is a PipedOutputStream and PipedInputStream, which is not supported in Scala Native")
-    println("My (extremely naive) implementation is a ByteArrayOutputStream and ByteArrayInputStream")
-    println("Which may be utterly wrong ... ")
-    val pipedOutputStream = new ByteArrayOutputStream()
-    val pipedInputStream = new ByteArrayInputStream(new Array[Byte](1000000))
-
-    val writer = Future {
-      val writerStream = new DataOutputStream(pipedOutputStream)
-      for (i <- 1 to 10) {
-        writerStream.writeInt(i)
-        Thread.sleep(100) // Simulate some delay
-      }
-      writerStream.close()
-    }
+    val pipedOutputStream = new PipedOutputStream()
+    val pipedInputStream = new PipedInputStream()
+    pipedInputStream.connect(pipedOutputStream)
 
     val srcOut = new ProxyStream.Output(pipedOutputStream, ProxyStream.OUT)
     val srcErr = new ProxyStream.Output(pipedOutputStream, ProxyStream.ERR)
