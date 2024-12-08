@@ -23,16 +23,24 @@ This branch ported (in order) the following:
 
 This branch passes the tests on the JVM
 
+```
+git checkout utest_lift
+scala-cli test .
+```
+
 # scala_native
 
 This branch _attempts_ to switch the platform to scala native. I'm stuck on a couple of things:
 
 1. I can't get resources working. I'm unclear if that's a scala-cli thing or a me thing.
-2. I don't _think_ I've made other tests to the `FileToStreamTailerTest` implementation or test, but it now failes on native. Some work. I believe that (if resource were free) this would be expected to work on native?
+2. I don't _think_ I've made other tests to the `FileToStreamTailerTest` implementation or test, but it now failes on native. Some work. I believe that (if resource were free and unlimited) this would be expected to work on native?
 3. The other tests are commented out until such time as I can jump the first two hurdles.
 
 
-
+```
+git checkout native
+scala-cli test .
+```
 
 
 
