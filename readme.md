@@ -11,6 +11,7 @@ In terms of porting to scala native, it has some problems.
 - A reliance on junit
 - Some other oddballs.
 
+Passes tests though.
 
 # utest_lift
 
