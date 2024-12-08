@@ -5,6 +5,8 @@ import mill.main.client.ProxyStream
 import scala.concurrent.Future
 
 class TeeOutputStream(out1: OutputStream, out2: OutputStream) extends OutputStream {
+  println("WARNING: On JVM TeeOutputStream comes from apache commons. It is not availble in Scala Native")
+  println("I've tried to hack together a naive implementation, but it may be wrong and risky ...")
   override def write(b: Int): Unit = {
     out1.write(b)
     out2.write(b)

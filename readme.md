@@ -34,7 +34,7 @@ scala-cli test .
 This branch _attempts_ to switch the _platform_ to scala native. I'm stuck on a couple of things:
 
 1. I don't _think_ I've made other tests to the `FileToStreamTailerTest` implementation or test, but it now failes on native. Some work. I believe that (if resource were free and unlimited) this would be expected to work on native?
-2. The other tests are commented out until such time as I can jump the first two hurdles.
+2. Proxy stream tests relied on a `PipedInputStream` and a `TeeOutputStream` that I believe is not available in scala native. I've replaced this with a `ByteArrayInputStream` and `ByteArrayOutputStream` pair, and a hacky TeeImplementation...which ... doesn't work? COuld be a problem behind the keyboard?
 
 
 ```
