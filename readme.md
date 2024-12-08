@@ -22,7 +22,7 @@ This branch ported (in order) the following:
 3. The junit dependency removed
 4. The mill codebase itself (through the magic of chatGPT) rewritten into the closest scala code that followed the original java implementation
 
-This branch passes the tests on the JVM
+This branch passes the tests on the JVM. This makes me believe a pure scala port of the mill client is feasible.
 
 ```
 git checkout utest_lift
