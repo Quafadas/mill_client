@@ -6,8 +6,8 @@ import java.io.{FilterOutputStream, IOException, OutputStream}
   */
 class ProxyOutputStream(out: OutputStream) extends FilterOutputStream(out) {
 
-  /** Invoked by the write methods after the proxied call has returned successfully. The number of bytes written (1 for the {@@@@@@@link#write(int)} method, buffer length for {@@@@@@@link#write(byte[])} , etc.) is given as an argument. <p> Subclasses can override this method to add common post-processing functionality without having to override all the write
-    * methods. The default implementation does nothing.
+  /** Invoked by the write methods after the proxied call has returned successfully. The number of bytes written (1 for the {@@@@@@@@link#write(int)} method, buffer length for {@@@@@@@@link#write(byte[])} , etc.) is given as an argument. <p> Subclasses can override this method to add common post-processing functionality without having to override all the
+    * write methods. The default implementation does nothing.
     *
     * @since 2.0
     * @param n
@@ -19,7 +19,7 @@ class ProxyOutputStream(out: OutputStream) extends FilterOutputStream(out) {
     // noop
   }
 
-  /** Invoked by the write methods before the call is proxied. The number of bytes to be written (1 for the {@@@@@@@link#write(int)} method, buffer length for {@@@@@@@link#write(byte[])} , etc.) is given as an argument. <p> Subclasses can override this method to add common pre-processing functionality without having to override all the write methods. The
+  /** Invoked by the write methods before the call is proxied. The number of bytes to be written (1 for the {@@@@@@@@link#write(int)} method, buffer length for {@@@@@@@@link#write(byte[])} , etc.) is given as an argument. <p> Subclasses can override this method to add common pre-processing functionality without having to override all the write methods. The
     * default implementation does nothing.
     *
     * @since 2.0
@@ -32,7 +32,7 @@ class ProxyOutputStream(out: OutputStream) extends FilterOutputStream(out) {
     // noop
   }
 
-  /** Invokes the delegate's {@@@@@@@codeclose()} method.
+  /** Invokes the delegate's {@@@@@@@@codeclose()} method.
     * @throws IOException
     *   if an I/O error occurs.
     */
@@ -42,7 +42,7 @@ class ProxyOutputStream(out: OutputStream) extends FilterOutputStream(out) {
     // IOUtils.close(out, handleIOException)
   }
 
-  /** Invokes the delegate's {@@@@@@@codeflush()} method.
+  /** Invokes the delegate's {@@@@@@@@codeflush()} method.
     * @throws IOException
     *   if an I/O error occurs.
     */
@@ -66,7 +66,7 @@ class ProxyOutputStream(out: OutputStream) extends FilterOutputStream(out) {
     throw e
   }
 
-  /** Invokes the delegate's {@@@@@@@codewrite(byte[])} method.
+  /** Invokes the delegate's {@@@@@@@@codewrite(byte[])} method.
     * @param bts
     *   the bytes to write
     * @throws IOException
@@ -84,7 +84,7 @@ class ProxyOutputStream(out: OutputStream) extends FilterOutputStream(out) {
     }
   }
 
-  /** Invokes the delegate's {@@@@@@@codewrite(byte[])} method.
+  /** Invokes the delegate's {@@@@@@@@codewrite(byte[])} method.
     * @param bts
     *   the bytes to write
     * @param st
@@ -105,7 +105,7 @@ class ProxyOutputStream(out: OutputStream) extends FilterOutputStream(out) {
     }
   }
 
-  /** Invokes the delegate's {@@@@@@@codewrite(int)} method.
+  /** Invokes the delegate's {@@@@@@@@codewrite(int)} method.
     * @param idx
     *   the byte to write
     * @throws IOException

@@ -14,7 +14,7 @@ class FileToStreamTailer(file: File, stream: PrintStream, intervalMsec: Int) ext
 
   override def run(): Unit = {
     if (isInterrupted) keepReading = false
-    var reader: Option[BufferedReader] = None
+    var reader: Option[BufferedReader2] = None
 
     try {
       while (keepReading || flushy) {
@@ -22,19 +22,30 @@ class FileToStreamTailer(file: File, stream: PrintStream, intervalMsec: Int) ext
         try {
           // Init reader if not already done
           if (reader.isEmpty) {
-            Try(new BufferedReader(new FileReader(file))) match {
-              case Success(r)                        => reader = Some(r)
-              case Failure(_: FileNotFoundException) => ignoreHead = false
-              case Failure(_)                        => // handle other exceptions
+            Try(new BufferedReader2(new FileReader(file))) match {
+              case Success(r) =>
+                println("reader exists")
+                reader = Some(r)
+              case Failure(_: FileNotFoundException) =>
+                println("no file found")
+                ignoreHead = false
+              case Failure(_) =>
+                println("other exception")
+              // handle other exceptions
             }
           }
 
           reader.foreach { r =>
+            println("found reader")
             try {
               var line: String = null
               while ({ line = r.readLine(); line != null }) {
+                println("line")
                 if (!ignoreHead) {
+                  println("printing line")
                   stream.println(line)
+                } else {
+                  println("ignoring head")
                 }
               }
               // After reading once, stop ignoring the head

@@ -22,21 +22,17 @@ class InputPumper(
 
       val buffer = new Array[Byte](100)
       while (running) {
-        if (!runningCheck.getAsBoolean) {
-          running = false
-        } else if (checkAvailable && srcStream.available() == 0) {
-          Thread.sleep(2)
-        } else {
-          var n = -1
-          try {
-            n = srcStream.read(buffer)
-          } catch {
-            case _: Exception => n = -1
-          }
-
-          if (n == -1) {
-            running = false
-          } else {
+        if (!runningCheck.getAsBoolean) running = false
+        else {
+          val n =
+            try {
+              srcStream.read(buffer)
+            } catch {
+              case _: Exception => -1
+            }
+          if (n == -1) running = false
+          else if (n == 0) Thread.sleep(1)
+          else {
             try {
               destStream.write(buffer, 0, n)
               destStream.flush()
